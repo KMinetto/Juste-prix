@@ -42,10 +42,13 @@ void guessingNumber(int numberToGuess, int proposal) {
 int main() {
     cout << "Bienvenue au \"Juste Prix\" !" << endl;
 
-    auto numberToGuess{3'784};
-    auto proposal{0};
+    auto games{3};
     
-    guessingNumber(numberToGuess, proposal);
+    for (auto numberToGuess : {2'018, 42, 1984}) {
+        auto proposal{0};
+        guessingNumber(numberToGuess, proposal);
+    }
+    
 
     return 0;
 }
