@@ -18,18 +18,25 @@ void guessingNumber(int numberToGuess, int proposal) {
     cout << "Veuillez deviner le nombre à deviner :" << endl;
 
     do {
-        trials++;
         cin >> proposal;
-
-        if (proposal > numberToGuess) {
-            cout << "Le nombre est plus petit !" << endl;
-        } else if (proposal < numberToGuess) {
-            cout << "Le nombre est plus grand !" << endl;
-        } else if (proposal == numberToGuess) {
-            cout << "Vous avez gagné !" << endl << "Il vous a fallu " << trials << " essais pour trouver le juste prix !" << endl;
+        if (proposal >= 0) {
+            trials++;
+            if (proposal > numberToGuess) {
+                cout << "Le nombre est plus petit !" << endl;
+            } else if (proposal < numberToGuess) {
+                cout << "Le nombre est plus grand !" << endl;
+            } else if (proposal == numberToGuess) {
+                cout << "Bravo !" << endl;
+            }
         }
 
-    } while (proposal != numberToGuess);
+    } while (proposal != numberToGuess && proposal >= 0);
+
+    if (proposal == numberToGuess) {
+        cout << "Partie terminée en " << trials << " tentatives !";
+    } else {
+        cout << "Partie abandonnée !";
+    }
 }
 
 int main() {
