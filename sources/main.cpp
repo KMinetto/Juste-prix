@@ -39,16 +39,36 @@ void guessingNumber(int numberToGuess, int proposal) {
     }
 }
 
+/**
+ * @brief Display a menu to play or quit game
+ * 
+ */
+void displayMenu() {
+    auto choice{'j'};
+    cout << "j: Jouer" << endl;
+    cout << "q: Quitter" << endl;
+
+    cin >> choice;
+
+    switch (choice) {
+    case 'j':
+        cout << "C'est partie !" << endl;
+        for (auto numberToGuess : {2'018, 42, 1984}) {
+            auto proposal{0};
+            guessingNumber(numberToGuess, proposal);
+        }
+        break;
+    default:
+        cout << "Au revoir !";
+        break;
+    }
+
+}
+
 int main() {
     cout << "Bienvenue au \"Juste Prix\" !" << endl;
 
-    auto games{3};
-    
-    for (auto numberToGuess : {2'018, 42, 1984}) {
-        auto proposal{0};
-        guessingNumber(numberToGuess, proposal);
-    }
-    
+    displayMenu();    
 
     return 0;
 }
