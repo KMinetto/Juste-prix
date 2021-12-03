@@ -1,10 +1,17 @@
 // Libraries
-#include<iostream>
+#include <iostream>
 
 // Imported files
 
 // Namespaces
 using namespace std;
+
+// Enumeration
+enum class MenuChoice {
+    PLAY = 'j',
+    QUIT = 'q',
+    INCORRECT
+};
 
 /**
  * @brief Traitement pour voir si le nombre proposé est le même que le nombre à deviner
@@ -12,14 +19,15 @@ using namespace std;
  * @param numberToGuess 
  * @param proposal 
  */
-void guessingNumber(int numberToGuess, int proposal) {    
+void guessingNumber(int numberToGuess, int proposal) {   
+    const auto MINIMAL_PRICE{0};
     auto trials{0};
 
     cout << "Veuillez deviner le nombre à deviner :" << endl;
 
     do {
         cin >> proposal;
-        if (proposal >= 0) {
+        if (proposal >= MINIMAL_PRICE) {
             trials++;
             if (proposal > numberToGuess) {
                 cout << "Le nombre est plus petit !" << endl;
@@ -30,7 +38,7 @@ void guessingNumber(int numberToGuess, int proposal) {
             }
         }
 
-    } while (proposal != numberToGuess && proposal >= 0);
+    } while (proposal != numberToGuess && proposal >= MINIMAL_PRICE);
 
     if (proposal == numberToGuess) {
         cout << "Partie terminée en " << trials << " tentatives !";
@@ -44,20 +52,30 @@ void guessingNumber(int numberToGuess, int proposal) {
  * 
  */
 void displayMenu() {
-    auto choice{'j'};
-    cout << "j: Jouer" << endl;
-    cout << "q: Quitter" << endl;
+    cout << static_cast<char>(MenuChoice::PLAY) << " Jouer" << endl;
+    cout << static_cast<char>(MenuChoice::QUIT) << " Quitter" << endl;
 
-    cin >> choice;
+    auto choice{MenuChoice::PLAY};
+    char userChoice;
+    cin >> userChoice;
+    
+    if (userChoice == static_cast<char>(MenuChoice::PLAY) || userChoice == static_cast<char>(MenuChoice::QUIT)) {
+        choice = static_cast<MenuChoice>(userChoice);
+    } else {
+        choice = MenuChoice::INCORRECT;
+    }
+    
 
     switch (choice) {
-    case 'j':
+    case MenuChoice::PLAY:
         cout << "C'est partie !" << endl;
-        for (auto numberToGuess : {2'018, 42, 1984}) {
+        for (auto numberToGuess : {2'018, 42, 1'984}) {
             auto proposal{0};
             guessingNumber(numberToGuess, proposal);
         }
         break;
+    case MenuChoice::QUIT:
+    case MenuChoice::INCORRECT:
     default:
         cout << "Au revoir !";
         break;
