@@ -3,8 +3,7 @@
 // Enumeration
 enum class MenuChoice {
     PLAY = 'a', // Play one game
-    PLAY_EASY = 'b', // Maximum 1'000
-    PLAY_THREE_GAMES = 'c',
+    SCORES = 's',
     QUIT = 'q',
     INCORRECT
 };
