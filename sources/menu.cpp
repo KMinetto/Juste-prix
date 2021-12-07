@@ -30,9 +30,10 @@ void menuChoices() {
 void displayMenu() {
     auto scores = ArrayScores{0, 0, 0};
     auto currentIndex{0};
+    
+    auto random = randomNumber(MAXIMAL_PRICE);
 
     bool continueGame{true};
-
     while(continueGame) {
         menuChoices();
 
@@ -40,7 +41,7 @@ void displayMenu() {
 
         switch (choice) {
             case MenuChoice::PLAY:
-                scores[currentIndex] = guessingNumber(3000, MAXIMAL_PRICE);
+                scores[currentIndex] = guessingNumber(random, MAXIMAL_PRICE);
                 currentIndex = (currentIndex + 1) % SCORES;
                 break;
             case MenuChoice::SCORES:
