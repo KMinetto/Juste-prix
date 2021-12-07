@@ -37,7 +37,7 @@ int guessingNumber(int numberToGuess, int max) {
     if (proposal == numberToGuess) {
         cout << "Partie terminée en " << trials << " tentatives !" << endl;
         cout << "Durée de la partie : " << timer.count() << " secondes" << endl;
-        if (timer < 5s) {
+        if (timer < 30s) {
             cout << "Bravo vous avez gagné !" << endl;
         } else {
             cout << "Vous avez malheureusement mis trop de temps pour trouver la bonne réponse :(" << endl;
