@@ -7,7 +7,7 @@
 
 using namespace std;
 
-void guessingNumber(int numberToGuess, int max) { 
+int guessingNumber(int numberToGuess, int max) { 
     auto proposal{0};  
     auto trials{0};
 
@@ -33,11 +33,17 @@ void guessingNumber(int numberToGuess, int max) {
     } else {
         cout << "Partie abandonnée !";
     }
+
+    return trials;
 }
 
-void playThreeGames() {
-    cout << "C'est partie !" << endl;
-    for (auto numberToGuess : {2'018, 42, 1'984}) {
-        guessingNumber(numberToGuess);
+void displayScores(ArrayScores &scores) {
+    cout << "Scores des trois dernières parties : " << endl;
+        for (auto score : scores) {
+        if (score == 0) {
+            cout << "-" << endl;
+        } else {
+            cout << score << " essais" << endl;
+        }
     }
 }

@@ -1,5 +1,6 @@
 // Libraries
 #include <iostream>
+#include <array>
 
 // Imported files .h
 #include "../Headers/constants.h"
@@ -12,8 +13,8 @@ MenuChoice askMenuChoice() {
     char userChoice;
     cin >> userChoice;
     
-    if (userChoice == static_cast<char>(MenuChoice::PLAY) || userChoice == static_cast<char>(MenuChoice::QUIT) || userChoice == static_cast<char>(MenuChoice::PLAY_EASY)
-        || userChoice == static_cast<char>(MenuChoice::PLAY_THREE_GAMES)) {
+    if (userChoice == static_cast<char>(MenuChoice::PLAY) || userChoice == static_cast<char>(MenuChoice::QUIT)
+        || userChoice == static_cast<char>(MenuChoice::SCORES)) {
         return static_cast<MenuChoice>(userChoice);
     } else {
         return MenuChoice::INCORRECT;
@@ -21,13 +22,15 @@ MenuChoice askMenuChoice() {
 }
 
 void menuChoices() {
-    cout << static_cast<char>(MenuChoice::PLAY) << " Jouer" << endl;
-    cout << static_cast<char>(MenuChoice::PLAY_EASY) << " Jouer une partie facile" << endl;
-    cout << static_cast<char>(MenuChoice::PLAY_THREE_GAMES) << " Jouer trois parties" << endl;
-    cout << static_cast<char>(MenuChoice::QUIT) << " Quitter" << endl;
+    cout << static_cast<char>(MenuChoice::PLAY) << ": Jouer" << endl;
+    cout << static_cast<char>(MenuChoice::SCORES) << ": Afficher les scores" << endl;
+    cout << static_cast<char>(MenuChoice::QUIT) << ": Quitter" << endl;
 }
 
 void displayMenu() {
+    auto scores = ArrayScores{0, 0, 0};
+    auto currentIndex{0};
+
     bool continueGame{true};
 
     while(continueGame) {
@@ -37,13 +40,11 @@ void displayMenu() {
 
         switch (choice) {
             case MenuChoice::PLAY:
-                guessingNumber(3000, MAXIMAL_PRICE);
+                scores[currentIndex] = guessingNumber(3000, MAXIMAL_PRICE);
+                currentIndex = (currentIndex + 1) % SCORES;
                 break;
-            case MenuChoice::PLAY_EASY:
-                guessingNumber(250, MAXIMAL_PRICE_EASY);
-                break;
-            case MenuChoice::PLAY_THREE_GAMES:
-                playThreeGames();
+            case MenuChoice::SCORES:
+                displayScores(scores);
                 break;
             case MenuChoice::QUIT:
                 cout << "Au revoir !";
